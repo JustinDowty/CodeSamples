@@ -32,63 +32,30 @@ function isVisible(el){
 
 function checkAnimations(){
 	$('.slideup-module').each(function(){			
-			if (isVisible($(this)){
-				$(this).addClass("slideup");
-				$(this).removeClass("slideup-module");
-				if($(this).hasClass('slick-slide')){
-					$(this).parents('.slick-slider').first().slick('slickPlay');
-				}
-			} 
-		});
-		/* Slide Right Animation */
-		$('.slideright-module').each(function(){
-			if (isVisible($(this))){
-				$(this).addClass("slideright");
-				$(this).removeClass("slideright-module");
-				if($(this).hasClass('slick-slide')){
-					$(this).parents('.slick-slider').first().slick('slickPlay');
-				}
-			} 
-		});
-		/* Slide Left Animation */
-		$('.slideleft-module').each(function(){
-			if (isVisible($(this)){
-				$(this).addClass("slideleft");
-				$(this).removeClass("slideleft-module");
-				if($(this).hasClass('slick-slide')){
-					$(this).parents('.slick-slider').first().slick('slickPlay');
-				}
-			} 
-		});
-		/* Pop Up Animation */
-		$('.popup-module').each(function(){
-			var height = $(this).outerHeight();
-			var topBound = $(this).offset().top + (height / 3);
-			var bottomBound = $(this).offset().top + height;
-			var elementTop = $(this).offset().top;
-			var elementMiddle = $(this).offset().top + height/2;
-			var elementBottom = $(this).offset().top + height;
-			
-			var windowBottom = $(window).scrollTop() + $(window).height();
-			var windowTop = $(window).scrollTop();
-			if (windowBottom < bottomBound && windowBottom > topBound){
-				$(this).addClass("popup");
-				$(this).removeClass("popup-module");
-				if($(this).hasClass('slick-slide')){
-					$(this).parents('.slick-slider').first().slick('slickPlay');
-				}
-			} else if (windowTop < bottomBound - (height / 3) && windowTop > topBound - (height / 3)) {
-				$(this).addClass("popup");
-				$(this).removeClass("popup-module");
-				if($(this).hasClass('slick-slide')){
-					$(this).parents('.slick-slider').first().slick('slickPlay');
-				}
-			} else if (windowTop < elementMiddle && windowBottom > elementMiddle) { 
-				$(this).addClass("popup");
-				$(this).removeClass("popup-module");
-				if($(this).hasClass('slick-slide')){
-					$(this).parents('.slick-slider').first().slick('slickPlay');
-				}
-			}
-		});
+		if (isVisible($(this)){
+			$(this).addClass("slideup");
+			$(this).removeClass("slideup-module");
+		} 
+	});
+	/* Slide Right Animation */
+	$('.slideright-module').each(function(){
+		if (isVisible($(this))){
+			$(this).addClass("slideright");
+			$(this).removeClass("slideright-module");
+		} 
+	});
+	/* Slide Left Animation */
+	$('.slideleft-module').each(function(){
+		if (isVisible($(this)){
+			$(this).addClass("slideleft");
+			$(this).removeClass("slideleft-module");
+		} 
+	});
+	/* Pop Up Animation */
+	$('.popup-module').each(function(){
+		if (isVisible($(this)){
+			$(this).addClass("popup");
+			$(this).removeClass("popup-module");
+		} 
+	});
 }
