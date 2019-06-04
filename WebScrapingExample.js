@@ -29,39 +29,39 @@ async function getDescriptions(){
     }
 }
 
-/** i is current index (row) in sheet */
+/* i is current index (row) in sheet */
 function makeRequest(i) {
 	
-	/* New Item will be a row for our new file, which is represented by an object */
+    /* New Item will be a row for our new file, which is represented by an object */
     /* Each property name represents the column name for the value */
     let newItem = {};
     newItem["Company"] = oldData[i]["Company"];
 	
-	/* Appending a http header to the urls when necessary for successful calls */
+    /* Appending a http header to the urls when necessary for successful calls */
     if(oldData[i]["WebsiteDomain"].substring(0,4) != "http") {
         newItem["WebsiteDomain"] = "http://" + oldData[i]["WebsiteDomain"];
     } else {
         newItem["WebsiteDomain"] = oldData[i]["WebsiteDomain"];
     }
 	
-	/* We are requesting the document with 'rp' at the url endpoint */
+    /* We are requesting the document with 'rp' at the url endpoint */
     return rp(newItem["WebsiteDomain"])
-		/* If the document is returned successfully this block with be executed */
+	/* If the document is returned successfully this block with be executed */
         /* the 'html' parameter will contain the document, this can be named whatever you please */
         .then(function(html){
 			
-			/* We use Cheerio (named $) to parse the document to find the meta description tag in the head */
-			/* There are many other useful bits of information contained in meta tags you can scrape here */
-			/* For my purposes and this example we are seeking the description meta information */
-			var description = $('meta[name="description"]', html)['0'];
-			var ogDescription = $('meta[name="og:description"]', html)['0'];
+	    /* We use Cheerio (named $) to parse the document to find the meta description tag in the head */
+	    /* There are many other useful bits of information contained in meta tags you can scrape here */
+	    /* For my purposes and this example we are seeking the description meta information */
+	    var description = $('meta[name="description"]', html)['0'];
+	    var ogDescription = $('meta[name="og:description"]', html)['0'];
             if(description){
                 foundDesc++;
                 newItem["Description"] = description.attribs.content;
                 newData.push(newItem);
 				
-			/* Some sites use meta description tags with 'og:' at the beginning */
-			/* In case there is one but not the other, we will look for that as well */
+	    /* Some sites use meta description tags with 'og:' at the beginning */
+	    /* In case there is one but not the other, we will look for that as well */
             } else if(ogDescription){
                 foundDesc++;
                 newItem["Description"] = ogDescription.attribs.content;
@@ -78,7 +78,7 @@ function makeRequest(i) {
                 console.log("****************");
             }
 			
-			/** Program finishes when the last request is processed */
+	    /** Program finishes when the last request is processed */
             if(itemsRead == totalItems - 1){
                 writeToFile();
                 return;
@@ -118,7 +118,7 @@ function writeToFile(){
     console.log("Error codes:");
     console.log(errorCodes);
 	
-	/* Here we write our new data to a new file */
+    /* Here we write our new data to a new file */
     var ws = XLSX.utils.json_to_sheet(newData);
     var wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, "Description_List");
