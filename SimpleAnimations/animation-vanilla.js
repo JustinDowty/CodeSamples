@@ -25,33 +25,19 @@ function isVisible(el){
 	}
 }
 
+// Using the CSS pattern visible in the CSS file we can loop the different animation
+// names to check all elements within the array classNames
 function checkAnimations(){
-	var popups = document.getElementsByClassName('popup-module');
-	for(var i = 0; i < popups.length; i++){
-		if(isVisible(popups[i])){
-			popups[i].classList.add("popup");
-			popups[i].classList.remove("popup-module");
-		}
-	}
-	var slideups = document.getElementsByClassName('slideup-module');
-	for(var i = 0; i < slideups.length; i++){
-		if(isVisible(slideups[i])){
-			slideups[i].classList.add("slideup");
-			slideups[i].classList.remove("slideup-module");
-		}
-	}
-	var sliderights = document.getElementsByClassName('slideright-module');
-	for(var i = 0; i < sliderights.length; i++){
-		if(isVisible(sliderights[i])){
-			sliderights[i].classList.add("slideright");
-			sliderights[i].classList.remove("slideright-module");
-		}
-	}
-	var slidelefts = document.getElementsByClassName('slideleft-module');
-	for(var i = 0; i < slidelefts.length; i++){
-		if(isVisible(slidelefts[i])){
-			slidelefts[i].classList.add("slideleft");
-			slidelefts[i].classList.remove("slideleft-module");
+	var classNames = ["popup", "slideup", "slideright", "slideleft"];
+	for(var nameIndex = 0; nameIndex < classNames.length; nameIndex++) {
+		var className = classNames[nameIndex];
+		var moduleName = className + "-module";
+		var elements = document.getElementsByClassName(moduleName);
+		for(var i = 0; i < elements.length; i++) {
+			if(isVisible(elements[i])){
+				elements[i].classList.add(className);
+				elements[i].classList.remove(moduleName);
+			}
 		}
 	}
 }

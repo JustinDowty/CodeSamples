@@ -30,32 +30,18 @@ function isVisible(el){
 	}
 }
 
+// Using the CSS pattern visible in the CSS file we can loop the different animation
+// names to check all elements within the array classNames
 function checkAnimations(){
-	$('.slideup-module').each(function(){			
-		if (isVisible($(this)){
-			$(this).addClass("slideup");
-			$(this).removeClass("slideup-module");
-		} 
-	});
-	/* Slide Right Animation */
-	$('.slideright-module').each(function(){
-		if (isVisible($(this))){
-			$(this).addClass("slideright");
-			$(this).removeClass("slideright-module");
-		} 
-	});
-	/* Slide Left Animation */
-	$('.slideleft-module').each(function(){
-		if (isVisible($(this)){
-			$(this).addClass("slideleft");
-			$(this).removeClass("slideleft-module");
-		} 
-	});
-	/* Pop Up Animation */
-	$('.popup-module').each(function(){
-		if (isVisible($(this)){
-			$(this).addClass("popup");
-			$(this).removeClass("popup-module");
-		} 
-	});
+	var classNames = ["popup", "slideup", "slideright", "slideleft"];
+	for(var nameIndex = 0; nameIndex < classNames.length; nameIndex++) {
+		var className = classNames[nameIndex];
+		var moduleName = className + "-module";
+		$("." + moduleName).each(function(){			
+			if (isVisible($(this))){
+				$(this).addClass(className);
+				$(this).removeClass(moduleName);
+			} 
+		});
+	}
 }
