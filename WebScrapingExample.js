@@ -2,7 +2,7 @@ const XLSX = require('xlsx');
 const $ = require('cheerio');
 const rp = require('request-promise');
 
-/* Replace 'Sites_List' with your CSV file name */
+/* Replace 'File' with your CSV file name */
 const workbook = XLSX.readFile('File.csv');
 const sheet_name_list = workbook.SheetNames;
 
